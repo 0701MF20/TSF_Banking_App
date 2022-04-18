@@ -7,4 +7,7 @@
     <string name="warning_title">Warning!!!!</string>
     <string name="Individual_User_Delete">User Deleted</string>
     <string name="mandatory">Incomplete Details</string>
+    <string name="Choose_Account">Select Account</string>
+
+
 </resources>

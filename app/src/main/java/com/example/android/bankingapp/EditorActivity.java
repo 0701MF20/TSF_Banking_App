@@ -6,15 +6,19 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -63,6 +67,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     //private int mGender = 0;
     //for content uri which is recieved with intent
     public Uri IntentContentUri;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -277,6 +282,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         AlertDialog alertDialog=builder.create();
         alertDialog.show();
     }
+
     //this is for the  top back arrow or backUpHomeEnable bUTTON
     @Override
     public void onBackPressed() {

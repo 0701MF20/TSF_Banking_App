@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -28,6 +29,7 @@ import static com.example.android.bankingapp.data.BankContract.BankEntry.CONTENT
 public class AllUserActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,BankAdapter.BankAdapterOnClickHandler {
     private RecyclerView recyclerView;
     private BankAdapter bankAdapter;
+    public  Uri intentUri;
     private ProgressBar mLoadingIndicator;
     private final String TAG = MainActivity.class.getSimpleName();
     public static final String[] MAIN_FORECAST_PROJECTION = {
@@ -44,6 +46,7 @@ public class AllUserActivity extends AppCompatActivity implements LoaderManager.
 
     public static final int INDEX_SNO = 0;
     private static final int ID_BANK_LOADER = 44;
+    private static final int ID_SELECT_ACCOUNT = 84;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +61,21 @@ public class AllUserActivity extends AppCompatActivity implements LoaderManager.
                 startActivity(intent);
             }
         });
+
+
+        //To recieve the intents
+        Intent intent = getIntent();
+        //To recieve the data associated with the intent
+        intentUri = intent.getData();
+
+        if (intentUri != null) {
+            setTitle(getString(R.string.Choose_Account));
+            //i keep loadermanager instance inside this loop so that idf the label is edit the they will show available data otherwise we do not need this
+
+        }
+
+
+
         recyclerView=findViewById(R.id.recylerview);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
     recyclerView.setLayoutManager(linearLayoutManager);
@@ -67,7 +85,10 @@ public class AllUserActivity extends AppCompatActivity implements LoaderManager.
       //  showLoading();
 
         LoaderManager.getInstance(this).initLoader(ID_BANK_LOADER,null,this);
-
+//if(intentUri!=null)
+//{
+//    LoaderManager.getInstance(this).initLoader(ID_SELECT_ACCOUNT, null, this);
+//}
     }
 
     @NonNull
@@ -76,7 +97,7 @@ public class AllUserActivity extends AppCompatActivity implements LoaderManager.
 /*
         switch (id) {
 
-            case ID_BANK_LOADER:
+
                 //URI for all rows of weather data in our weather table
                 Uri forecastQueryUri = CONTENT_URI;
                 // Sort order: Ascending by date
@@ -91,7 +112,16 @@ return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//Ban
 //                BankContract.BankEntry.COLUMN_BANK_PEOPLE_NAME,
 //                BankContract.BankEntry.COLUMN_ACCOUNT_NUMBER,
 //                BankContract.BankEntry.COLUMN_IFSC_NUMBER};
-        return new CursorLoader(this,BankContract.BankEntry.CONTENT_URI,MAIN_FORECAST_PROJECTION,null,null,null);
+      //  switch (id) {
+            //case ID_BANK_LOADER:
+                return new CursorLoader(this,BankContract.BankEntry.CONTENT_URI,MAIN_FORECAST_PROJECTION,null,null,null);
+           // break;
+         //   case ID_SELECT_ACCOUNT:
+
+        //        break;
+      //      default:
+     //           throw new RuntimeException("Loader Not Implemented: " + id);
+   //     }
     }
 
     @Override
@@ -128,9 +158,17 @@ return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//Ban
 
     @Override
     public void onClick(int account) {
-        Intent CustomerDetailIntent = new Intent(AllUserActivity.this,DetailActivity.class);
-Uri uri_for_account_clicked= CONTENT_URI.buildUpon().appendPath(Integer.toString(account)).build();
-CustomerDetailIntent.setData(uri_for_account_clicked);
-startActivity(CustomerDetailIntent);
+        if(intentUri!=null)
+        {
+            int amount=Integer.parseInt(intentUri.getLastPathSegment());
+            Log.e("AllUserActivity","Amount is:"+amount+"Account:::"+account);
+        }else
+        {
+            Intent CustomerDetailIntent = new Intent(AllUserActivity.this,DetailActivity.class);
+            Uri uri_for_account_clicked= CONTENT_URI.buildUpon().appendPath(Integer.toString(account)).build();
+            CustomerDetailIntent.setData(uri_for_account_clicked);
+            startActivity(CustomerDetailIntent);
+        }
+
     }
 }

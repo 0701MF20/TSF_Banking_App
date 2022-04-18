@@ -15,6 +15,14 @@ public class BankDbHelper extends SQLiteOpenHelper {
             BankContract.BankEntry.COLUMN_BANK_PEOPLE_MOBILE_NUMBER + " INTEGER NOT NULL , " +
             BankContract.BankEntry.COLUMN_TOTAL_BALANCE + " INTEGER NOT NULL DEFAULT 0 );";
 
+    //Record table for transfer
+    private final String SQL_CREATE_TRANSFER_MONEY_TABLE = " CREATE TABLE if not exists " + BankContract.BankEntry.TRANSFER_TABLE_NAME + " (" +
+            BankContract.BankEntry._2Id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            BankContract.BankEntry.COLUMN_FROM_ACCOUNT + " INTEGER NOT NULL DEFAULT 0 , "+
+            BankContract.BankEntry.COLUMN_TO_ACCOUNT + " INTEGER NOT NULL DEFAULT 0 , "+
+            BankContract.BankEntry.COLUMN_TRANSFER_MONEY + " INTEGER NOT NULL );";
+
+
     /**
      * Constructs a new instance of {@link BankDbHelper}.
      *
@@ -32,6 +40,8 @@ public class BankDbHelper extends SQLiteOpenHelper {
 
         // Execute the SQL statement
         sqLiteDatabase.execSQL(SQL_CREATE_BANK_TABLE);
+        //for transfer money
+        sqLiteDatabase.execSQL(SQL_CREATE_TRANSFER_MONEY_TABLE);
 
     }
 

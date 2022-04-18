@@ -1,20 +1,29 @@
 package com.example.android.bankingapp;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
 
 import com.example.android.bankingapp.data.BankContract;
+
+import static com.example.android.bankingapp.data.BankContract.BankEntry.CONTENT_URI;
 
 public class DetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     public static final String[] WEATHER_DETAIL_PROJECTION =new String[] {  BankContract.BankEntry._Id,
@@ -32,8 +41,11 @@ private TextView nameTextView;
     private TextView emailTextView;
     private TextView mobileNoTextView;
     private TextView totalBalanceTextView;
+    private Button transferButton;
     private Uri mUri;
     private static final int ID_DETAIL_LOADER = 353;
+    //Money to transfer
+    public static int transferAmount=0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,13 +56,86 @@ private TextView nameTextView;
         emailTextView=findViewById(R.id.emailIdtextView8);
         mobileNoTextView=findViewById(R.id.mobileIdtextView9);
         totalBalanceTextView=findViewById(R.id.balancetextView10);
+transferButton=findViewById(R.id.transferbutton2);
+transferButton.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+      /*  DialogInterface.OnClickListener discardOnClickListener=new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //for just simily finish it or not save the et details
+                finish();
+            }
+        };
+        enterMoneyForTransfer(discardOnClickListener);*/
+        //Method 1
 
+        AlertDialog.Builder builder2 =new AlertDialog.Builder(DetailActivity.this);
+// Set up the input
+        final EditText editTransferMoney = new EditText(DetailActivity.this);
+        builder2.setTitle("Enter the Amount");
+        builder2.setView(editTransferMoney);
+        LinearLayout layoutName=new LinearLayout(DetailActivity.this);
+        layoutName.setOrientation(LinearLayout.VERTICAL);
+        layoutName.addView(editTransferMoney);
+        builder2.setView(layoutName);
+        builder2.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        builder2.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+////there is need something to add here
+                transferAmount=Integer.parseInt(editTransferMoney.getText().toString());
+                Intent i4=new Intent(DetailActivity.this,AllUserActivity.class);
+                Uri uri_for_transfer_amount= CONTENT_URI.buildUpon().appendPath(Integer.toString(transferAmount)).build();
+                i4.setData(CONTENT_URI.buildUpon().appendPath(Integer.toString(transferAmount)).build());
+                startActivity(i4);
+                Log.e("Transfer Amount","transfer Amount is"+transferAmount+"uRIIII:::"+uri_for_transfer_amount);
+            }
+        });
+        builder2.show();
+    }
+});
         mUri = getIntent().getData();
         Log.e("DetailActivity","Uri "+mUri);
         if (mUri == null)
             throw new NullPointerException("URI for DetailActivity cannot be null");
 
         LoaderManager.getInstance(this).initLoader(ID_DETAIL_LOADER, null, this);
+    }
+    private void enterMoneyForTransfer(DialogInterface.OnClickListener dialogInterface)
+    {
+//Method 1
+
+        AlertDialog.Builder builder2 =new AlertDialog.Builder(this);
+// Set up the input
+        final EditText editTransferMoney = new EditText(DetailActivity.this);
+        builder2.setTitle("Enter the Amount");
+        builder2.setView(editTransferMoney);
+        LinearLayout layoutName=new LinearLayout(this);
+        layoutName.setOrientation(LinearLayout.VERTICAL);
+        layoutName.addView(editTransferMoney);
+        builder2.setView(layoutName);
+        builder2.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        builder2.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                transferAmount=Integer.parseInt(editTransferMoney.getText().toString());
+                Log.e("Transfer Amount","transfer Amount is"+transferAmount);
+            }
+        });
+
+
     }
 
     @NonNull

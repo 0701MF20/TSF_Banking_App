@@ -33,5 +33,15 @@ public final class BankContract {
         public static final String COLUMN_IFSC_NUMBER="ifsc_no";
         public static final String COLUMN_TOTAL_BALANCE="net_balance";
 
+        //For ReCORD tABLE
+        public static final String TRANSFER_TABLE_NAME="transfermoney";
+        public static final String _2Id=BaseColumns._ID;
+        public static final String COLUMN_FROM_ACCOUNT="from";
+        public static final String COLUMN_TO_ACCOUNT="to";
+        public static final String COLUMN_TRANSFER_MONEY="money";
+
+
+
+
     }
 }
