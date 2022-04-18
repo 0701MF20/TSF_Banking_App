@@ -1,5 +1,6 @@
 package com.example.android.bankingapp;
 
+import android.content.ContentUris;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -30,16 +31,18 @@ public class AllUserActivity extends AppCompatActivity implements LoaderManager.
     private ProgressBar mLoadingIndicator;
     private final String TAG = MainActivity.class.getSimpleName();
     public static final String[] MAIN_FORECAST_PROJECTION = {
+            BankContract.BankEntry._Id,
             BankContract.BankEntry.COLUMN_BANK_PEOPLE_NAME,
             BankContract.BankEntry.COLUMN_ACCOUNT_NUMBER,
             BankContract.BankEntry.COLUMN_IFSC_NUMBER,
 
     };
     private int mPosition = RecyclerView.NO_POSITION;
-    public static final int INDEX_PEOPLE_NAME = 0;
-    public static final int INDEX_ACCOUNT_NOS = 1;
-    public static final int INDEX_IFSC_CODE = 2;
+    public static final int INDEX_PEOPLE_NAME = 1;
+    public static final int INDEX_ACCOUNT_NOS = 2;
+    public static final int INDEX_IFSC_CODE = 3;
 
+    public static final int INDEX_SNO = 0;
     private static final int ID_BANK_LOADER = 44;
 
     @Override
@@ -64,6 +67,7 @@ public class AllUserActivity extends AppCompatActivity implements LoaderManager.
       //  showLoading();
 
         LoaderManager.getInstance(this).initLoader(ID_BANK_LOADER,null,this);
+
     }
 
     @NonNull

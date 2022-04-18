@@ -28,7 +28,7 @@ class BankAdapter extends RecyclerView.Adapter<BankAdapter.BankAdapterViewHolder
      * The interface that receives onClick messages.
      */
     public interface BankAdapterOnClickHandler {
-        void onClick(int account);
+        void onClick(int sno);
     }
 
   //  private boolean mUseTodayLayout;
@@ -135,8 +135,8 @@ bankAdapterViewHolder.nameView.setContentDescription(name);
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
             mCursor.moveToPosition(adapterPosition);
-            int accountNumber  = mCursor.getInt(AllUserActivity.INDEX_ACCOUNT_NOS);
-            mClickHandler.onClick(accountNumber);
+            int sNumber  = mCursor.getInt(AllUserActivity.INDEX_SNO);
+            mClickHandler.onClick(sNumber);
         }
     }
 }
