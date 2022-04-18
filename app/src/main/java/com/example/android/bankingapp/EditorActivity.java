@@ -163,7 +163,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         // Use trim to eliminate leading or trailing white space
         String name = mNameEditText.getText().toString().trim();
         int AccountNo = Integer.parseInt(mAccountEditText.getText().toString().trim());
-       int IFSCNo = Integer.parseInt(mAccountEditText.getText().toString().trim());
+       int IFSCNo = Integer.parseInt(mIFSCEditText.getText().toString().trim());
        String emailId=mEmailEditText.getText().toString().trim();
        int mobile=Integer.parseInt(mMobileEditText.getText().toString().trim());
        int customerbalance=Integer.parseInt(mCustomerEditText.getText().toString().trim());

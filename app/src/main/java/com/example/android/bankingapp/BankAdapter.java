@@ -2,6 +2,7 @@ package com.example.android.bankingapp;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,11 +76,14 @@ bankAdapterViewHolder.nameView.setContentDescription(name);
 
 /******************Account Nos*********************/
         int accountNos=mCursor.getInt(AllUserActivity.INDEX_ACCOUNT_NOS);
+       // Log.e("BankAdapter","account no:::"+accountNos+"  index ccount"+AllUserActivity.INDEX_ACCOUNT_NOS);
         bankAdapterViewHolder.accountView.setText(accountNos+"");
         bankAdapterViewHolder.accountView.setContentDescription(accountNos+"");
 
         /******************IFSC Nos*********************/
         int ifscNos=mCursor.getInt(AllUserActivity.INDEX_IFSC_CODE);
+   //     Log.e("BankAdapter","IFSC no:::"+ifscNos+"  index IFSC"+AllUserActivity.INDEX_IFSC_CODE);
+
         bankAdapterViewHolder.ifscView.setText(ifscNos+"");
         bankAdapterViewHolder.ifscView.setContentDescription(ifscNos+"");
 
