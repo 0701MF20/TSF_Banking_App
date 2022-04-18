@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    android:background="#4416aa">
+    <TextView
+        android:id="@+id/nameId"
+        android:text="Name"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </TextView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/IFSCId"
+            android:text="IFSC"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+
+            android:layout_height="wrap_content">
+        </TextView>
+        <TextView
+            android:id="@+id/AccountId"
+            android:text="ACCOUNT"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+
+            android:layout_height="wrap_content">
+        </TextView>
+    </LinearLayout>
+
+</LinearLayout>

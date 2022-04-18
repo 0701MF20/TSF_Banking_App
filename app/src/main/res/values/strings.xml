@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Banking App</string>
+    <string name="Edit_Detail">Edit Detail</string>
+    <string name="Add_DetailUser">Add User Detail</string>
+    <string name="User_iNSERTION_ERROR">Insertion ERROR!!!</string>
+    <string name="User_iNSERTION_SUCCESSFUL">Insertion Successful!!!</string>
+    <string name="warning_title">Warning!!!!</string>
+    <string name="Individual_User_Delete">User Deleted</string>
+    <string name="mandatory">Incomplete Details</string>
+</resources>

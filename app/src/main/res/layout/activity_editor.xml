@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00ff50">
+
+    <EditText
+        android:id="@+id/editTextPersonName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="28dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextTextIFSCCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="IFSC Code"
+        app:layout_constraintEnd_toEndOf="@+id/EmailIdeditTextTextPersonName2"
+        app:layout_constraintTop_toBottomOf="@+id/EmailIdeditTextTextPersonName2" />
+
+    <EditText
+        android:id="@+id/editTextTextAccountNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Account No"
+        app:layout_constraintEnd_toEndOf="@+id/editTextTextIFSCCode"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextIFSCCode" />
+
+    <TextView
+        android:id="@+id/AccountLabbeltxtView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Account No:"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextTextAccountNo"
+        app:layout_constraintEnd_toStartOf="@+id/editTextTextAccountNo"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IFSCLabeltextView3"
+        app:layout_constraintVertical_bias="0.704" />
+
+    <TextView
+        android:id="@+id/IFSCLabeltextView3"
+        android:layout_width="136dp"
+        android:layout_height="24dp"
+        android:text="Enter IFSC Code:"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextTextIFSCCode"
+        app:layout_constraintEnd_toStartOf="@+id/editTextTextIFSCCode"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailIdtextView8"
+        app:layout_constraintVertical_bias="0.745" />
+
+    <TextView
+        android:id="@+id/NameLabeltextView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:text="Enter Name:"
+        app:layout_constraintEnd_toStartOf="@+id/editTextPersonName"
+        app:layout_constraintHorizontal_bias="0.425"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/mobileLabeltextView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Mobile Nos:"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/MobileNoseditTextTextPersonName"
+        app:layout_constraintHorizontal_bias="0.672"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NameLabeltextView4"
+        app:layout_constraintVertical_bias="0.073" />
+
+    <TextView
+        android:id="@+id/emailIdtextView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Email Id:"
+        app:layout_constraintBottom_toBottomOf="@+id/EmailIdeditTextTextPersonName2"
+        app:layout_constraintEnd_toStartOf="@+id/EmailIdeditTextTextPersonName2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mobileLabeltextView5"
+        app:layout_constraintVertical_bias="0.786" />
+
+    <EditText
+        android:id="@+id/MobileNoseditTextTextPersonName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Mobile No"
+        app:layout_constraintEnd_toEndOf="@+id/editTextPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPersonName" />
+
+    <EditText
+        android:id="@+id/EmailIdeditTextTextPersonName2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Email ID"
+        app:layout_constraintEnd_toEndOf="@+id/MobileNoseditTextTextPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/MobileNoseditTextTextPersonName" />
+
+    <TextView
+        android:id="@+id/BALANCEtextView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Balance:"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/balanceTextTextPersonName3"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AccountLabbeltxtView2"
+        app:layout_constraintVertical_bias="0.168" />
+
+    <EditText
+        android:id="@+id/balanceTextTextPersonName3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Balance"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/editTextTextAccountNo"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextAccountNo"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>
