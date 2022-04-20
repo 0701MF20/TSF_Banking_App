@@ -15,6 +15,8 @@ import androidx.annotation.Nullable;
 
 import java.security.Provider;
 
+import static com.example.android.bankingapp.data.BankContract.BankEntry.COLUMN_BANK_PEOPLE_NAME;
+
 public class BankProvider extends ContentProvider {
     /**Tag for the log messgaes*/
     public static final String LOG_TAG=BankProvider.class.getSimpleName();
@@ -54,23 +56,31 @@ public class BankProvider extends ContentProvider {
      */
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+        //Log.e("BankProvider","Reached HERE1");
+
         //sqlite database is object is created and get readable method is called
         SQLiteDatabase db=mDbHelpers.getReadableDatabase();
         //cursor
         Cursor cursor;
         //match through UriMatcher
         int match=sUriMatcher.match(uri);
+        Log.e("BankProvider","match is:::::::::::"+match);
         switch(match)
         {
             case BANKS:
                 //for whole table pet
+                Log.e("BankProvider","ALL TABLE");
                 cursor=db.query(BankContract.BankEntry.TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
             case BANK_ID:
+                Log.e("BankProvider","SINGLE TABLE");
                 //for single id of pet
+
                 selection= BankContract.BankEntry._Id+"=?";
                 selectionArgs=new String[]{String.valueOf(ContentUris.parseId(uri))};
+                Log.e("BankProvider","SELECTION ARGS"+ContentUris.parseId(uri));
                 cursor=db.query(BankContract.BankEntry.TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+
                 break;
             default:
                 throw new IllegalArgumentException("Cannot Query unknown URI"+uri);
@@ -174,8 +184,9 @@ public class BankProvider extends ContentProvider {
 
         switch (match)
         {//for whole table
-            case BANK_ID:
+            case BANKS:
                 //notify about if any change occur(in local term it is sound)
+                Log.e("BankProvider","multiple row");
 
                 updatedRow=updatePet(uri,contentValues,selection,selectionArgs);
                 break;
@@ -183,10 +194,13 @@ public class BankProvider extends ContentProvider {
             // so we know which row to update. Selection will be "_id=?" and selection
             // arguments will be a String array containing the actual ID.
             //for single rows
-            case BANKS:
+
+            //TODO:BANKS is going to use for sure
+            case BANK_ID:
+
                 selection= BankContract.BankEntry._Id+"=?";
                 selectionArgs=new String[]{String.valueOf(ContentUris.parseId(uri))};
-
+Log.e("BankProvider","single row");
                 updatedRow= updatePet(uri,contentValues,selection,selectionArgs);
                 break;
             default:
@@ -212,7 +226,7 @@ public class BankProvider extends ContentProvider {
         //for checking whwether key value is present in content values
         // If the {@link PetEntry#COLUMN_PET_NAME} key is present,
         // check that the name value is not null.
-        if(contentValues.containsKey(BankContract.BankEntry.COLUMN_BANK_PEOPLE_NAME))
+      /*  if(contentValues.containsKey(BankContract.BankEntry.COLUMN_BANK_PEOPLE_NAME))
         {
             //for name
             String sanityName=contentValues.getAsString(BankContract.BankEntry.COLUMN_BANK_PEOPLE_NAME);
@@ -244,6 +258,24 @@ public class BankProvider extends ContentProvider {
             }
         }
 
+        if(contentValues.containsKey(BankContract.BankEntry.COLUMN_TOTAL_BALANCE))
+        {
+            //for weight
+            Integer sanitybalance=contentValues.getAsInteger(BankContract.BankEntry.COLUMN_TOTAL_BALANCE);
+            if(sanitybalance!=null||sanitybalance<499)
+            {
+                throw new IllegalArgumentException("BALANCE MUST BE ATLEAST 500");
+            }
+        }
+        if(contentValues.containsKey(BankContract.BankEntry.COLUMN_BANK_PEOPLE_MOBILE_NUMBER))
+        {
+            //for weight
+            Integer sanitymobile=contentValues.getAsInteger(BankContract.BankEntry.COLUMN_BANK_PEOPLE_MOBILE_NUMBER);
+            if(sanitymobile!=null||sanitymobile<0)
+            {
+                throw new IllegalArgumentException("Mobile must be graeter than zero");
+            }
+        }*/
         // No need to check the breed, any value is valid (including null).
 
         // If there are no values to update, then don't try to update the database

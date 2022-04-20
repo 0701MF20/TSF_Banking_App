@@ -48,6 +48,10 @@
             android:authorities="com.example.android.bankingapp"
             android:name=".data.BankProvider"
             android:exported="false"/>
+        <activity
+            android:name=".TransferActivity"
+            android:label="List of user"
+           />
     </application>
 
 </manifest>

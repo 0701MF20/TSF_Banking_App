@@ -18,8 +18,9 @@ public class BankDbHelper extends SQLiteOpenHelper {
     //Record table for transfer
     private final String SQL_CREATE_TRANSFER_MONEY_TABLE = " CREATE TABLE if not exists " + BankContract.BankEntry.TRANSFER_TABLE_NAME + " (" +
             BankContract.BankEntry._2Id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            BankContract.BankEntry.COLUMN_FROM_ACCOUNT + " INTEGER NOT NULL DEFAULT 0 , "+
-            BankContract.BankEntry.COLUMN_TO_ACCOUNT + " INTEGER NOT NULL DEFAULT 0 , "+
+            BankContract.BankEntry.COLUMN_ACCOUNT_NUMBER + " INTEGER NOT NULL DEFAULT 0 , "+
+            BankContract.BankEntry.COLUMN_FROM + " INTEGER NOT NULL DEFAULT 0 , "+
+            BankContract.BankEntry.COLUMN_TO + " INTEGER NOT NULL DEFAULT 0 , "+
             BankContract.BankEntry.COLUMN_TRANSFER_MONEY + " INTEGER NOT NULL );";
 
 

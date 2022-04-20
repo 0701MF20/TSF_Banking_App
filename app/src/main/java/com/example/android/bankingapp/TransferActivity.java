@@ -1,6 +1,7 @@
 package com.example.android.bankingapp;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,5 +11,6 @@ public class TransferActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_transfer);
+    setTitle("Transfer Record");
     }
 }

@@ -36,8 +36,8 @@ public final class BankContract {
         //For ReCORD tABLE
         public static final String TRANSFER_TABLE_NAME="transfermoney";
         public static final String _2Id=BaseColumns._ID;
-        public static final String COLUMN_FROM_ACCOUNT="from";
-        public static final String COLUMN_TO_ACCOUNT="to";
+        public static final String COLUMN_FROM="fromaccount";
+        public static final String COLUMN_TO="toaccount";
         public static final String COLUMN_TRANSFER_MONEY="money";
 
 

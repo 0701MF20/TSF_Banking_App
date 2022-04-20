@@ -1,5 +1,6 @@
 package com.example.android.bankingapp;
 
+import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -26,6 +27,7 @@ import com.example.android.bankingapp.data.BankContract;
 import static com.example.android.bankingapp.data.BankContract.BankEntry.CONTENT_URI;
 
 public class DetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+  public static int fromAccountIndex;
     public static final String[] WEATHER_DETAIL_PROJECTION =new String[] {  BankContract.BankEntry._Id,
             BankContract.BankEntry.COLUMN_BANK_PEOPLE_NAME,
             BankContract.BankEntry.COLUMN_ACCOUNT_NUMBER,
@@ -90,11 +92,32 @@ transferButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(DialogInterface dialogInterface, int i) {
 ////there is need something to add here
                 transferAmount=Integer.parseInt(editTransferMoney.getText().toString());
+               int fromAccount=Integer.parseInt(AccountTextView.getText().toString());
+               int from_account_balance=Integer.parseInt(totalBalanceTextView.getText().toString());
+               String from_emaiL_id=emailTextView.getText().toString();
+               String from_name=nameTextView.getText().toString();
+               int contact_nos=Integer.parseInt(mobileNoTextView.getText().toString());
+               int ifsc_code=Integer.parseInt(ifscTextView.getText().toString());
                 Intent i4=new Intent(DetailActivity.this,AllUserActivity.class);
-                Uri uri_for_transfer_amount= CONTENT_URI.buildUpon().appendPath(Integer.toString(transferAmount)).build();
-                i4.setData(CONTENT_URI.buildUpon().appendPath(Integer.toString(transferAmount)).build());
+          Bundle bundle=new Bundle();
+          bundle.putInt("transfer_amount",transferAmount);
+          bundle.putInt("account_from",fromAccount);
+          bundle.putInt("Index_Of_From_Account",fromAccountIndex);
+          bundle.putInt("From_account_balance",from_account_balance);
+          bundle.putString("email_Id_From",from_emaiL_id);
+          bundle.putString("from_name_user",from_name);
+          bundle.putInt("ifsc_code",ifsc_code);
+          bundle.putInt("from_contact_nos",contact_nos);
+          bundle.putString("type","from");
+
+
+            //    Uri uri_for_transfer_amount= CONTENT_URI.buildUpon().appendPath(Integer.toString(transferAmount)).build();
+             //   Uri uri_for_trans_amount_and_account= CONTENT_URI.buildUpon().appendPath(Integer.toString(transferAmount)).appendPath(Integer.toString(fromAccount)).build();
+     //           i4.setData(CONTENT_URI.buildUpon().appendPath(Integer.toString(transferAmount)).build());
+             i4.putExtras(bundle);
                 startActivity(i4);
-                Log.e("Transfer Amount","transfer Amount is"+transferAmount+"uRIIII:::"+uri_for_transfer_amount);
+             //   Log.e("Transfer Amount","transfer Amount is"+transferAmount+"uRIIII:::"+uri_for_transfer_amount);
+                Log.e("Transfer Amount","transfer Amount is::::::"+transferAmount+"::::::::From account:::::::"+fromAccount);
             }
         });
         builder2.show();
@@ -141,7 +164,12 @@ transferButton.setOnClickListener(new View.OnClickListener() {
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-Log.e("DetailActivity","ID is:"+id+"  muri   "+mUri);
+long fromaccountIndex= ContentUris.parseId(mUri);
+fromAccountIndex=(int)fromaccountIndex;
+
+        Log.e("DetailActivity","ID is:"+id+"  muri   "+mUri+"FROM ACCOUNT INDEX::::"+fromAccountIndex);
+
+
         switch (id) {
 
             case ID_DETAIL_LOADER:

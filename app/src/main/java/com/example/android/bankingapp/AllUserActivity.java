@@ -1,14 +1,17 @@
 package com.example.android.bankingapp;
 
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +33,9 @@ public class AllUserActivity extends AppCompatActivity implements LoaderManager.
     private RecyclerView recyclerView;
     private BankAdapter bankAdapter;
     public  Uri intentUri;
+    private Cursor mCursor;
+    public Bundle bundle;
+    public static String type="";
     private ProgressBar mLoadingIndicator;
     private final String TAG = MainActivity.class.getSimpleName();
     public static final String[] MAIN_FORECAST_PROJECTION = {
@@ -64,11 +70,11 @@ public class AllUserActivity extends AppCompatActivity implements LoaderManager.
 
 
         //To recieve the intents
-        Intent intent = getIntent();
+     //   Intent intent = getIntent();
         //To recieve the data associated with the intent
-        intentUri = intent.getData();
-
-        if (intentUri != null) {
+       // intentUri = intent.getData();
+           bundle=getIntent().getExtras();
+        if (bundle != null) {
             setTitle(getString(R.string.Choose_Account));
             //i keep loadermanager instance inside this loop so that idf the label is edit the they will show available data otherwise we do not need this
 
@@ -158,17 +164,92 @@ return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//Ban
 
     @Override
     public void onClick(int account) {
-        if(intentUri!=null)
+       type=bundle.getString("type");
+        int trans_money=bundle.getInt("transfer_amount");
+        Bundle bg=new Bundle();
+        if(bundle!=null&&type=="from")
         {
-            int amount=Integer.parseInt(intentUri.getLastPathSegment());
-            Log.e("AllUserActivity","Amount is:"+amount+"Account:::"+account);
-        }else
+
+
+
+            //TODO:(2)
+           // int amount=Integer.parseInt(intentUri.getLastPathSegment());
+
+            //TO ACCOUNT INDEX
+            int to_account_index=account;
+            Uri Content_to_uri=ContentUris.withAppendedId(CONTENT_URI,to_account_index);
+
+
+//            Uri intenturiss=ContentUris.withAppendedId(CONTENT_URI,(long)to_account_index);
+//            Cursor pointCursor=getContentResolver().query(intenturiss,null,null,null,null);
+//         String name1=pointCursor.getString(AllUserActivity.INDEX_PEOPLE_NAME);
+//            Log.e("AllUserActivity","NAME IS::::::::"+name1);
+//            if(pointCursor==null)
+//            {
+//                Toast.makeText(this,"Money is not deducted from Account"+rowsUpdated,Toast.LENGTH_SHORT).show();
+//            } else {
+//                Toast.makeText(this,"Money is updated"+rowsUpdated,Toast.LENGTH_SHORT).show();
+//            }
+
+
+
+////TO ACCOUNT INDEX
+//            int to_account_index=account;
+//mCursor=getContentResolver().query()
+//FROM_ACCOUNT FEATURE
+            int from_account=bundle.getInt("account_from");
+            int from_account_index=bundle.getInt("Index_Of_From_Account");
+            int from_account_balance_total=bundle.getInt("From_account_balance");
+            //TODO:mAKE IT MORE FLEXIBLE
+            from_account_balance_total=from_account_balance_total-trans_money;
+            int from_code_ifsc=bundle.getInt("ifsc_code");
+            int from_nos_contact=bundle.getInt("from_contact_nos");
+            String from_id_email=bundle.getString("email_Id_From");
+            String from_user_name=bundle.getString("from_name_user");
+
+
+  //          Uri contentUriForUpdated=Uri.withAppendedPath(BankContract.C
+//TRANSFER
+            Log.e("AllUserActivity","Transfer Money:::"+trans_money);
+//FROM ACCOUNT
+            Log.e("AllUserActivity","FROM_ACCOUNT_NO"+from_account);
+            Log.e("AllUserActivity","FROM_ACCOUNT_INDEX"+from_account_index);
+            Log.e("AllUserActivity","FROM_ACCOUNT_CURRENT_BALANCE"+from_account_balance_total);
+
+
+            Log.e("AllUserActivity","TO_ACCOUNT_INDEX"+to_account_index);
+
+            //FROM TABLE
+           ContentValues valuesfrom=new ContentValues();
+            valuesfrom.put(BankContract.BankEntry.COLUMN_BANK_PEOPLE_NAME,from_user_name);
+            valuesfrom.put(BankContract.BankEntry.COLUMN_ACCOUNT_NUMBER,from_account);
+            valuesfrom.put(BankContract.BankEntry.COLUMN_IFSC_NUMBER,from_code_ifsc);
+            valuesfrom.put(BankContract.BankEntry.COLUMN_BANK_PEOPLE_EMAIL,from_id_email);
+            valuesfrom.put(BankContract.BankEntry.COLUMN_BANK_PEOPLE_MOBILE_NUMBER,from_nos_contact);
+            valuesfrom.put(BankContract.BankEntry.COLUMN_TOTAL_BALANCE,from_account_balance_total);
+
+
+            Uri intenturi=ContentUris.withAppendedId(CONTENT_URI,(long)from_account_index);
+            int rowsUpdated=getContentResolver().update(intenturi,valuesfrom,null,null);
+            if(rowsUpdated==0)
+            {
+                Toast.makeText(this,"Money is not deducted from Account"+rowsUpdated,Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this,"Money is updated"+rowsUpdated,Toast.LENGTH_SHORT).show();
+            }
+
+
+            type="to";
+      Intent i5=new Intent(AllUserActivity.this,TransferActivity.class);
+      startActivity(i5);
+        }/*else*/
+        if(type=="to"&&trans_money!=0)
         {
+            Log.e("AllUserActivity","Kuch toh gadbad h daya");
             Intent CustomerDetailIntent = new Intent(AllUserActivity.this,DetailActivity.class);
             Uri uri_for_account_clicked= CONTENT_URI.buildUpon().appendPath(Integer.toString(account)).build();
             CustomerDetailIntent.setData(uri_for_account_clicked);
             startActivity(CustomerDetailIntent);
         }
-
     }
 }
