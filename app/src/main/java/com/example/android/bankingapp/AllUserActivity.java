@@ -35,7 +35,7 @@ public class AllUserActivity extends AppCompatActivity implements LoaderManager.
     public  Uri intentUri;
     private Cursor mCursor;
     public Bundle bundle;
-    public static String type;
+    public static int type=0;
     public static int to_account_index;
     private ProgressBar mLoadingIndicator;
     private final String TAG = MainActivity.class.getSimpleName();
@@ -165,10 +165,10 @@ return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//Ban
 
     @Override
     public void onClick(int account) {
-       type=bundle.getString("type");
+   //    type=bundle.getInt("type");
         int trans_money=bundle.getInt("transfer_amount");
-        Bundle bg=new Bundle();
-        if(bundle!=null&&type=="from")
+        /*&&type==0*/
+        if(bundle!=null)
         {
 
 
@@ -240,11 +240,11 @@ return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//Ban
             }
 
 
-            type="to";
+    //        type=1;
       Intent i5=new Intent(AllUserActivity.this,TransferActivity.class);
       startActivity(i5);
-        }/*else*/
-        if((type=="to"&&trans_money!=0)||bundle==null)
+        }else
+       // if(type==1||bundle==null)
         {
             Log.e("AllUserActivity","Kuch toh gadbad h daya");
             Intent CustomerDetailIntent = new Intent(AllUserActivity.this,DetailActivity.class);

@@ -112,7 +112,7 @@ transferButton.setOnClickListener(new View.OnClickListener() {
           bundle.putString("from_name_user",from_name);
           bundle.putInt("ifsc_code",ifsc_code);
           bundle.putInt("from_contact_nos",contact_nos);
-          bundle.putString("type","from");
+       //   bundle.putInt("type",0);
 
 
             //    Uri uri_for_transfer_amount= CONTENT_URI.buildUpon().appendPath(Integer.toString(transferAmount)).build();
@@ -170,8 +170,8 @@ transferButton.setOnClickListener(new View.OnClickListener() {
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
 
 
-long fromaccountIndex= ContentUris.parseId(mUri);
-fromAccountIndex=(int)fromaccountIndex;
+//long fromaccountIndex= ContentUris.parseId(mUri);
+//fromAccountIndex=(int)fromaccountIndex;
 
         Log.e("DetailActivity","ID is:"+id+"  muri   "+mUri+"FROM ACCOUNT INDEX::::"+fromAccountIndex);
 
@@ -237,9 +237,9 @@ fromAccountIndex=(int)fromaccountIndex;
             /*****************BALANCE *****************/
             int balanceIndex = data.getColumnIndex(BankContract.BankEntry.COLUMN_TOTAL_BALANCE);
             int balance;
-            if(type=="to")
+           /* if(type==1)
             {
-                type="from";
+                type=0;
              balance=data.getInt(balanceIndex)+transferAmount;
 
                 ContentValues valuesfrom=new ContentValues();
@@ -260,10 +260,10 @@ fromAccountIndex=(int)fromaccountIndex;
                 }
 
 
-            }
-            else {
+            }*/
+        //    else {
                 balance = data.getInt(balanceIndex);
-            }
+      //      }
             totalBalanceTextView.setText(balance + "");
             totalBalanceTextView.setContentDescription(balance + "");
 
