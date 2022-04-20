@@ -1,6 +1,7 @@
 package com.example.android.bankingapp;
 
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +26,8 @@ import androidx.loader.content.Loader;
 
 import com.example.android.bankingapp.data.BankContract;
 
+import static com.example.android.bankingapp.AllUserActivity.to_account_index;
+import static com.example.android.bankingapp.AllUserActivity.type;
 import static com.example.android.bankingapp.data.BankContract.BankEntry.CONTENT_URI;
 
 public class DetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -164,6 +168,8 @@ transferButton.setOnClickListener(new View.OnClickListener() {
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
+
+
 long fromaccountIndex= ContentUris.parseId(mUri);
 fromAccountIndex=(int)fromaccountIndex;
 
@@ -230,9 +236,40 @@ fromAccountIndex=(int)fromaccountIndex;
             emailTextView.setContentDescription(emailId + "");
             /*****************BALANCE *****************/
             int balanceIndex = data.getColumnIndex(BankContract.BankEntry.COLUMN_TOTAL_BALANCE);
-            int balance = data.getInt(balanceIndex);
+            int balance;
+            if(type=="to")
+            {
+                type="from";
+             balance=data.getInt(balanceIndex)+transferAmount;
+
+                ContentValues valuesfrom=new ContentValues();
+                valuesfrom.put(BankContract.BankEntry.COLUMN_BANK_PEOPLE_NAME,nameId);
+                valuesfrom.put(BankContract.BankEntry.COLUMN_ACCOUNT_NUMBER,accountNo);
+                valuesfrom.put(BankContract.BankEntry.COLUMN_IFSC_NUMBER,IfscCode);
+                valuesfrom.put(BankContract.BankEntry.COLUMN_BANK_PEOPLE_EMAIL,emailId);
+                valuesfrom.put(BankContract.BankEntry.COLUMN_BANK_PEOPLE_MOBILE_NUMBER,mobileno);
+                valuesfrom.put(BankContract.BankEntry.COLUMN_TOTAL_BALANCE,balance);
+
+                Uri intenturi=ContentUris.withAppendedId(CONTENT_URI,(long)to_account_index);
+                int rowsUpdated=getContentResolver().update(intenturi,valuesfrom,null,null);
+                if(rowsUpdated==0)
+                {
+                    Toast.makeText(this,"Money is not updated in this Account"+rowsUpdated,Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this,"Money is updated in this account"+rowsUpdated,Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+            else {
+                balance = data.getInt(balanceIndex);
+            }
             totalBalanceTextView.setText(balance + "");
             totalBalanceTextView.setContentDescription(balance + "");
+
+
+
+
 
         }
         /* Store the forecast summary String in our forecast summary field to share later */

@@ -35,7 +35,8 @@ public class AllUserActivity extends AppCompatActivity implements LoaderManager.
     public  Uri intentUri;
     private Cursor mCursor;
     public Bundle bundle;
-    public static String type="";
+    public static String type;
+    public static int to_account_index;
     private ProgressBar mLoadingIndicator;
     private final String TAG = MainActivity.class.getSimpleName();
     public static final String[] MAIN_FORECAST_PROJECTION = {
@@ -176,7 +177,7 @@ return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//Ban
            // int amount=Integer.parseInt(intentUri.getLastPathSegment());
 
             //TO ACCOUNT INDEX
-            int to_account_index=account;
+            to_account_index=account;
             Uri Content_to_uri=ContentUris.withAppendedId(CONTENT_URI,to_account_index);
 
 
@@ -243,7 +244,7 @@ return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//Ban
       Intent i5=new Intent(AllUserActivity.this,TransferActivity.class);
       startActivity(i5);
         }/*else*/
-        if(type=="to"&&trans_money!=0)
+        if((type=="to"&&trans_money!=0)||bundle==null)
         {
             Log.e("AllUserActivity","Kuch toh gadbad h daya");
             Intent CustomerDetailIntent = new Intent(AllUserActivity.this,DetailActivity.class);
