@@ -37,6 +37,7 @@ public class AllUserActivity extends AppCompatActivity implements LoaderManager.
     public Bundle bundle;
     public static int type=0;
     public static int to_account_index;
+    int trans_money=0;
     private ProgressBar mLoadingIndicator;
     private final String TAG = MainActivity.class.getSimpleName();
     public static final String[] MAIN_FORECAST_PROJECTION = {
@@ -166,12 +167,12 @@ return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//Ban
     @Override
     public void onClick(int account) {
    //    type=bundle.getInt("type");
-        int trans_money=bundle.getInt("transfer_amount");
         /*&&type==0*/
         if(bundle!=null)
         {
 
 
+             trans_money=bundle.getInt("transfer_amount");
 
             //TODO:(2)
            // int amount=Integer.parseInt(intentUri.getLastPathSegment());
@@ -231,6 +232,7 @@ return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//Ban
 
 
             Uri intenturi=ContentUris.withAppendedId(CONTENT_URI,(long)from_account_index);
+            Log.e("UserAllActivity","IntentUri"+intenturi);
             int rowsUpdated=getContentResolver().update(intenturi,valuesfrom,null,null);
             if(rowsUpdated==0)
             {
@@ -244,7 +246,6 @@ return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//Ban
       Intent i5=new Intent(AllUserActivity.this,TransferActivity.class);
       startActivity(i5);
         }else
-       // if(type==1||bundle==null)
         {
             Log.e("AllUserActivity","Kuch toh gadbad h daya");
             Intent CustomerDetailIntent = new Intent(AllUserActivity.this,DetailActivity.class);

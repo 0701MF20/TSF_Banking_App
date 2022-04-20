@@ -63,7 +63,12 @@ private TextView nameTextView;
         mobileNoTextView=findViewById(R.id.mobileIdtextView9);
         totalBalanceTextView=findViewById(R.id.balancetextView10);
 transferButton=findViewById(R.id.transferbutton2);
-transferButton.setOnClickListener(new View.OnClickListener() {
+        mUri = getIntent().getData();
+        Log.e("DetailActivity","Uri "+mUri);
+        fromAccountIndex=(int)ContentUris.parseId(mUri);
+        Log.e("DetailActivity","from index "+fromAccountIndex);
+
+        transferButton.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
       /*  DialogInterface.OnClickListener discardOnClickListener=new DialogInterface.OnClickListener() {
@@ -127,8 +132,8 @@ transferButton.setOnClickListener(new View.OnClickListener() {
         builder2.show();
     }
 });
-        mUri = getIntent().getData();
-        Log.e("DetailActivity","Uri "+mUri);
+//        mUri = getIntent().getData();
+//        Log.e("DetailActivity","Uri "+mUri);
         if (mUri == null)
             throw new NullPointerException("URI for DetailActivity cannot be null");
 

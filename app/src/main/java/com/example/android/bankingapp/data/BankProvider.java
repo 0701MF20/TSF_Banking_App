@@ -202,6 +202,7 @@ public class BankProvider extends ContentProvider {
                 selectionArgs=new String[]{String.valueOf(ContentUris.parseId(uri))};
 Log.e("BankProvider","single row");
                 updatedRow= updatePet(uri,contentValues,selection,selectionArgs);
+                Log.e("BankProvider","Updated Row:::::::"+updatedRow);
                 break;
             default:
                 throw new IllegalArgumentException("Update is not supported for"+uri);
