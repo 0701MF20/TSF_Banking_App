@@ -211,9 +211,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             //nothing is updated this means that
             if(rowUpdated==0)
             {
-                Toast.makeText(this,"Editor update failed"+rowUpdated,Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Details update failed"+rowUpdated,Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this,"User updated"+rowUpdated,Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Details updated"+rowUpdated,Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -234,7 +234,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         //AlertDialog.Builder create it and assign a title,message,setPositive,setNegative
         AlertDialog.Builder builderForDelete=new AlertDialog.Builder(this);
         builderForDelete.setTitle(R.string.warning_title);
-        builderForDelete.setMessage("Do you really want to delete this pet?");
+        builderForDelete.setMessage("Do you really want to this account details?");
         //For not deleting
         builderForDelete.setPositiveButton("No", new DialogInterface.OnClickListener() {
             @Override

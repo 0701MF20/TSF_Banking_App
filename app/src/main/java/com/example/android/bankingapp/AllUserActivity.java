@@ -307,7 +307,7 @@ fromAccountForTransferTable=from_account;
             Log.e("AllUserActivity","TRU::::"+title);
 
     //        type=1;
-      Intent i5=new Intent(AllUserActivity.this,TransferActivity.class);
+      Intent i5=new Intent(AllUserActivity.this,MainActivity.class);
      startActivity(i5);
      // bundle=null;
         }else
@@ -317,7 +317,7 @@ fromAccountForTransferTable=from_account;
 //            {
 //                Log.e("AllUserActivity","TRUE");
 //            }
-            Log.e("AllUserActivity","Kuch toh gadbad h daya");
+   //         Log.e("AllUserActivity","Kuch toh gadbad h daya");
             Intent CustomerDetailIntent = new Intent(AllUserActivity.this,DetailActivity.class);
             Uri uri_for_account_clicked= CONTENT_URI.buildUpon().appendPath(Integer.toString(account)).build();
             CustomerDetailIntent.setData(uri_for_account_clicked);

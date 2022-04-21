@@ -186,4 +186,8 @@ return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//Ban
         mLoadingIndicator.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

@@ -2,9 +2,13 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:title="Delete Details"
         android:id="@+id/action_delete"
-        />
-    <item android:title="Saved"
-        android:id="@+id/action_saved"/>
+        android:icon="@android:drawable/ic_menu_delete"
+        android:title="Delete Details"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_saved"
+        android:icon="@android:drawable/ic_menu_save"
+        android:title="Saved"
+        app:showAsAction="ifRoom" />
 </menu>

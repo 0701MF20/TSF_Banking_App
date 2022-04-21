@@ -9,6 +9,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -290,5 +292,30 @@ transferButton=findViewById(R.id.transferbutton2);
         emailTextView.setText("");
         mobileNoTextView.setText("");
         totalBalanceTextView.setText("");
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu options from the res/menu/menu_editor.xml file.
+        // This adds menu items to the app bar.
+        getMenuInflater().inflate(R.menu.menu_edit, menu);
+
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // User clicked on a menu option in the app bar overflow menu
+        switch (item.getItemId()) {
+
+            case R.id.change_detail:
+                Intent changeDetailMenuIntent=new Intent(DetailActivity.this,EditorActivity.class);
+                Uri CurrentUri= ContentUris.withAppendedId(BankContract.BankEntry.CONTENT_URI,fromAccountIndex);
+
+                changeDetailMenuIntent.setData(CurrentUri);
+                startActivity(changeDetailMenuIntent);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
