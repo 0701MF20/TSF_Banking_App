@@ -240,18 +240,77 @@ return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//Ban
             } else {
                 Toast.makeText(this,"Money is updated"+rowsUpdated,Toast.LENGTH_SHORT).show();
             }
+            CharSequence title=getTitle();
+        //testing
+            if(title==getString(R.string.Choose_Account))
+            {
+         //       Intent CustomerDetailIntent = new Intent(AllUserActivity.this,DetailActivity.class);
+                Uri uri_for_account_sec_clicked= CONTENT_URI.buildUpon().appendPath(Integer.toString(account)).build();
+                Log.e("AllUserActivity","to_account::::"+Integer.toString(account));
 
+                Cursor cursor1=getContentResolver().query(uri_for_account_sec_clicked,null,BankContract.BankEntry._Id+"=?",new String[]{String.valueOf(ContentUris.parseId(uri_for_account_sec_clicked))},null);
+              cursor1.moveToPosition(0);
+              int nameColIndex=cursor1.getColumnIndex(BankContract.BankEntry.COLUMN_BANK_PEOPLE_NAME);
+              int emailColIndex=cursor1.getColumnIndex(BankContract.BankEntry.COLUMN_BANK_PEOPLE_EMAIL);
+                int mobileColIndex=cursor1.getColumnIndex(BankContract.BankEntry.COLUMN_BANK_PEOPLE_MOBILE_NUMBER);
+                int AcColIndex=cursor1.getColumnIndex(BankContract.BankEntry.COLUMN_ACCOUNT_NUMBER);
+                int ifscColIndex=cursor1.getColumnIndex(BankContract.BankEntry.COLUMN_IFSC_NUMBER);
+                int balColIndex=cursor1.getColumnIndex(BankContract.BankEntry.COLUMN_TOTAL_BALANCE);
+
+                String toName=cursor1.getString(nameColIndex);
+                String toEmail=cursor1.getString(emailColIndex);
+                int toMobile=cursor1.getInt(mobileColIndex);
+                int toIfsc=cursor1.getInt(ifscColIndex);
+                int toBalance=cursor1.getInt(balColIndex);
+                int toAcc=cursor1.getInt(AcColIndex);
+                toBalance=toBalance+trans_money;
+                Log.e("UserAllActivity","To balance:::::"+toBalance);
+                //TO TABLE
+                ContentValues valuesTo=new ContentValues();
+                valuesTo.put(BankContract.BankEntry.COLUMN_BANK_PEOPLE_NAME,toName);
+                valuesTo.put(BankContract.BankEntry.COLUMN_ACCOUNT_NUMBER,toAcc);
+                valuesTo.put(BankContract.BankEntry.COLUMN_IFSC_NUMBER,toIfsc);
+                valuesTo.put(BankContract.BankEntry.COLUMN_BANK_PEOPLE_EMAIL,toEmail);
+                valuesTo.put(BankContract.BankEntry.COLUMN_BANK_PEOPLE_MOBILE_NUMBER,toMobile);
+                valuesTo.put(BankContract.BankEntry.COLUMN_TOTAL_BALANCE,toBalance);
+
+              //  Uri intenturi=ContentUris.withAppendedId(CONTENT_URI,(long)from_account_index);
+              //  Log.e("UserAllActivity","IntentUri"+intenturi);
+                int torowsUpdated=getContentResolver().update(uri_for_account_sec_clicked,valuesTo,null,null);
+                if(torowsUpdated==0)
+                {
+                    Toast.makeText(this,"Money is not updated in receiver account"+torowsUpdated,Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this,"Money is updated in receiver account"+torowsUpdated,Toast.LENGTH_SHORT).show();
+                }
+
+
+           //     Log.e("AllUserActivity","POSITION::::"+ cursor1.getPosition());
+             //   Log.e("AllUserActivity","POSITION::::"+ name23);
+
+
+                //   CustomerDetailIntent.setData(uri_for_account_clicked);
+               // startActivity(CustomerDetailIntent);
+            }
+            Log.e("AllUserActivity","TRU::::"+title);
 
     //        type=1;
       Intent i5=new Intent(AllUserActivity.this,TransferActivity.class);
-      startActivity(i5);
+     startActivity(i5);
+     // bundle=null;
         }else
         {
+
+//            if(title==getString(R.string.Choose_Account))
+//            {
+//                Log.e("AllUserActivity","TRUE");
+//            }
             Log.e("AllUserActivity","Kuch toh gadbad h daya");
             Intent CustomerDetailIntent = new Intent(AllUserActivity.this,DetailActivity.class);
             Uri uri_for_account_clicked= CONTENT_URI.buildUpon().appendPath(Integer.toString(account)).build();
             CustomerDetailIntent.setData(uri_for_account_clicked);
             startActivity(CustomerDetailIntent);
         }
+
     }
 }
