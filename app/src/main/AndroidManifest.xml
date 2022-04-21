@@ -50,7 +50,7 @@
             android:exported="false"/>
         <activity
             android:name=".TransferActivity"
-            android:label="List of user"
+
            />
     </application>
 

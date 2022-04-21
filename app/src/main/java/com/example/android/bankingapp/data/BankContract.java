@@ -11,6 +11,7 @@ public final class BankContract {
     public static final String CONTENT_AUTHORITY="com.example.android.bankingapp";
     public static final Uri BASE_CONTENT_URI=Uri.parse("content://"+CONTENT_AUTHORITY);
     public static  final String PATH_SET="bankingapp";
+    public static  final String PATH_SET_TRANS="transfermoney";
     public static final class BankEntry implements BaseColumns {
 
         /**Content uri for referring to table*/
@@ -33,6 +34,8 @@ public final class BankContract {
         public static final String COLUMN_IFSC_NUMBER="ifsc_no";
         public static final String COLUMN_TOTAL_BALANCE="net_balance";
 
+        /**Content uri for referring to table*/
+        public static final Uri CONTENT_URI2=Uri.withAppendedPath(BASE_CONTENT_URI,PATH_SET_TRANS);
         //For ReCORD tABLE
         public static final String TRANSFER_TABLE_NAME="transfermoney";
         public static final String _2Id=BaseColumns._ID;

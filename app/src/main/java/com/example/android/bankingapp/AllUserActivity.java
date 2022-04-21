@@ -2,12 +2,15 @@ package com.example.android.bankingapp;
 
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -16,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
@@ -30,6 +34,9 @@ import java.net.URI;
 import static com.example.android.bankingapp.data.BankContract.BankEntry.CONTENT_URI;
 
 public class AllUserActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,BankAdapter.BankAdapterOnClickHandler {
+   public static int toAccountForTransferTable=0;
+           public static  int fromAccountForTransferTable=0;
+           public static int transferMoneyFromTransferTable=0;
     private RecyclerView recyclerView;
     private BankAdapter bankAdapter;
     public  Uri intentUri;
@@ -171,15 +178,16 @@ return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//Ban
         if(bundle!=null)
         {
 
-
              trans_money=bundle.getInt("transfer_amount");
+            transferMoneyFromTransferTable=trans_money;
+            Log.e("TransferActivity","transf"+transferMoneyFromTransferTable);
 
             //TODO:(2)
            // int amount=Integer.parseInt(intentUri.getLastPathSegment());
 
             //TO ACCOUNT INDEX
             to_account_index=account;
-            Uri Content_to_uri=ContentUris.withAppendedId(CONTENT_URI,to_account_index);
+   //         Uri Content_to_uri=ContentUris.withAppendedId(CONTENT_URI,to_account_index);
 
 
 //            Uri intenturiss=ContentUris.withAppendedId(CONTENT_URI,(long)to_account_index);
@@ -208,7 +216,7 @@ return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//Ban
             int from_nos_contact=bundle.getInt("from_contact_nos");
             String from_id_email=bundle.getString("email_Id_From");
             String from_user_name=bundle.getString("from_name_user");
-
+fromAccountForTransferTable=from_account;
 
   //          Uri contentUriForUpdated=Uri.withAppendedPath(BankContract.C
 //TRANSFER
@@ -240,11 +248,14 @@ return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//Ban
             } else {
                 Toast.makeText(this,"Money is updated"+rowsUpdated,Toast.LENGTH_SHORT).show();
             }
+            Log.e("AllUserActivity","where are you");
             CharSequence title=getTitle();
         //testing
             if(title==getString(R.string.Choose_Account))
             {
-         //       Intent CustomerDetailIntent = new Intent(AllUserActivity.this,DetailActivity.class);
+                Log.e("AllUserActivity","I am fine");
+
+                //       Intent CustomerDetailIntent = new Intent(AllUserActivity.this,DetailActivity.class);
                 Uri uri_for_account_sec_clicked= CONTENT_URI.buildUpon().appendPath(Integer.toString(account)).build();
                 Log.e("AllUserActivity","to_account::::"+Integer.toString(account));
 
@@ -264,6 +275,7 @@ return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//Ban
                 int toBalance=cursor1.getInt(balColIndex);
                 int toAcc=cursor1.getInt(AcColIndex);
                 toBalance=toBalance+trans_money;
+                toAccountForTransferTable=toAcc;
                 Log.e("UserAllActivity","To balance:::::"+toBalance);
                 //TO TABLE
                 ContentValues valuesTo=new ContentValues();
@@ -312,5 +324,28 @@ return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//Ban
             startActivity(CustomerDetailIntent);
         }
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu options from the res/menu/menu_editor.xml file.
+        // This adds menu items to the app bar.
+        getMenuInflater().inflate(R.menu.menu_alluser, menu);
+
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // User clicked on a menu option in the app bar overflow menu
+        switch (item.getItemId()) {
+
+            case R.id.action_transfer_menu_item:
+                Intent transferMenuIntent=new Intent(AllUserActivity.this,TransferActivity.class);
+                startActivity(transferMenuIntent);
+            break;
+                default:
+                    return super.onOptionsItemSelected(item);
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

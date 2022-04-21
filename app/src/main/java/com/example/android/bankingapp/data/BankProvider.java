@@ -25,6 +25,14 @@ public class BankProvider extends ContentProvider {
     public static final int BANK_ID=100;
     /** URI matcher code for the content URI for a single cutomer in the bank table */
     public static final int BANKS=101;
+
+    /** URI matcher code for the content URI for the transfer table */
+    public static final int TRANSFER_ID=102;
+    /** URI matcher code for the content URI for a single transfer in the transfer table */
+    public static final int TRANSFERS=103;
+
+
+
     /**
      * UriMatcher object to match a content URI to a corresponding code.
      * The input passed into the constructor represents the code to return for the root URI.
@@ -36,6 +44,10 @@ public class BankProvider extends ContentProvider {
         //1st parrameter is content authority , 2nd parameter is path and last parameter is alloted code constant
         sUriMatcher.addURI(BankContract.CONTENT_AUTHORITY,BankContract.PATH_SET,BANKS);
         sUriMatcher.addURI(BankContract.CONTENT_AUTHORITY,BankContract.PATH_SET+"/#",BANK_ID);
+//THIS IS I CHANGE IF NOT WORKING REMOVE IT
+        sUriMatcher.addURI(BankContract.CONTENT_AUTHORITY,BankContract.PATH_SET_TRANS+"/#",TRANSFER_ID);
+        sUriMatcher.addURI(BankContract.CONTENT_AUTHORITY,BankContract.PATH_SET_TRANS,TRANSFERS);
+
     }
     //REFERENCE VARIABLE OF PetDbHelper
     private BankDbHelper mDbHelpers;
@@ -82,6 +94,18 @@ public class BankProvider extends ContentProvider {
                 cursor=db.query(BankContract.BankEntry.TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
 
                 break;
+            case TRANSFERS:
+                Log.e("BankProvider","ALL transfer TABLE");
+                cursor=db.query(BankContract.BankEntry.TRANSFER_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                break;
+            case TRANSFER_ID:
+                Log.e("BankProvider","SINGLE TRANSFER TABLE");
+                //for single id of pet
+
+                selection= BankContract.BankEntry._2Id+"=?";
+                selectionArgs=new String[]{String.valueOf(ContentUris.parseId(uri))};
+                Log.e("BankProvider","SELECTION ARGStrans"+ContentUris.parseId(uri));
+                cursor=db.query(BankContract.BankEntry.TRANSFER_TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
             default:
                 throw new IllegalArgumentException("Cannot Query unknown URI"+uri);
         }
@@ -160,6 +184,13 @@ public class BankProvider extends ContentProvider {
                 // return the new URI with the ID appended to the end of it
                 Log.e(LOG_TAG,"ID IS::::"+ids);
                 uriss=ContentUris.withAppendedId(BankContract.BankEntry.CONTENT_URI,ids);
+                break;
+            case TRANSFERS:
+                long idss=db.insert(BankContract.BankEntry.TRANSFER_TABLE_NAME,null,contentValues);
+                // Once we know the ID of the new row in the table,
+                // return the new URI with the ID appended to the end of it
+                Log.e(LOG_TAG,"ID IS of transfer::::"+idss);
+                uriss=ContentUris.withAppendedId(BankContract.BankEntry.CONTENT_URI2,idss);
                 break;
             default:
                 throw new IllegalArgumentException("Cannot insert the row        ---------"+uri);
