@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00ff50">
+    android:background="#ff7a52">
 
     <EditText
         android:id="@+id/editTextPersonName"
@@ -14,12 +14,14 @@
         android:layout_marginTop="64dp"
         android:layout_marginEnd="28dp"
         android:ems="10"
+        android:textStyle="bold"
         android:inputType="textPersonName"
         android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:textStyle="bold"
         android:id="@+id/editTextTextIFSCCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,6 +33,7 @@
         app:layout_constraintTop_toBottomOf="@+id/EmailIdeditTextTextPersonName2" />
 
     <EditText
+        android:textStyle="bold"
         android:id="@+id/editTextTextAccountNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,6 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextIFSCCode" />
 
     <TextView
+        android:textStyle="bold"
         android:id="@+id/AccountLabbeltxtView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,6 +58,7 @@
         app:layout_constraintVertical_bias="0.704" />
 
     <TextView
+        android:textStyle="bold"
         android:id="@+id/IFSCLabeltextView3"
         android:layout_width="136dp"
         android:layout_height="24dp"
@@ -66,6 +71,7 @@
         app:layout_constraintVertical_bias="0.745" />
 
     <TextView
+        android:textStyle="bold"
         android:id="@+id/NameLabeltextView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -77,6 +83,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:textStyle="bold"
         android:id="@+id/mobileLabeltextView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -89,6 +96,7 @@
         app:layout_constraintVertical_bias="0.073" />
 
     <TextView
+        android:textStyle="bold"
         android:id="@+id/emailIdtextView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -100,6 +108,7 @@
         app:layout_constraintVertical_bias="0.786" />
 
     <EditText
+        android:textStyle="bold"
         android:id="@+id/MobileNoseditTextTextPersonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -111,6 +120,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextPersonName" />
 
     <EditText
+        android:textStyle="bold"
         android:id="@+id/EmailIdeditTextTextPersonName2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -122,6 +132,7 @@
         app:layout_constraintTop_toBottomOf="@+id/MobileNoseditTextTextPersonName" />
 
     <TextView
+        android:textStyle="bold"
         android:id="@+id/BALANCEtextView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -134,6 +145,7 @@
         app:layout_constraintVertical_bias="0.168" />
 
     <EditText
+        android:textStyle="bold"
         android:id="@+id/balanceTextTextPersonName3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

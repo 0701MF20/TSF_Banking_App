@@ -1,167 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#cc0088">
+    android:orientation="vertical"
+    android:padding="30dp"
+    android:background="#ff8759">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="32dp"
+
+
+    >
+    <TextView
+        android:id="@+id/namelabeltextView2"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="NAME:"
+        android:textStyle="bold"
+ />
 
     <TextView
         android:id="@+id/nametextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_weight="1"
         android:text="Name"
-        app:layout_constraintBottom_toBottomOf="@+id/namelabeltextView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.656"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/IfsctextView3"
-        android:layout_width="wrap_content"
+        android:textStyle="bold" />
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="IFSC CODE"
-        app:layout_constraintBottom_toBottomOf="@+id/ifsctextView7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.714"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/balancetextView10"
-        app:layout_constraintVertical_bias="1.0" />
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        >
+        <TextView
+            android:id="@+id/contacttextView4"
+            android:layout_width="0dp"
 
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+android:layout_gravity="center"
+            android:text="MOBILE NOS:"
+            android:textStyle="bold"
+ />
+        <TextView
+            android:id="@+id/mobileIdtextView9"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Mobile No"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        >
+        <TextView
+            android:id="@+id/EmailIdtextView5"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="EMAIL ID:"
+            android:textStyle="bold"
+
+            />
+        <TextView
+            android:id="@+id/emailIdtextView8"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Email Id"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        >
+        <TextView
+            android:id="@+id/ifsctextView7"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="IFSC CODE:"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/IfsctextView3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="IFSC CODE"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        >
+        <TextView
+            android:id="@+id/accounttextView3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="ACCOUNT NUMBER:"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/AccounttextView4"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Account No"
+            android:textStyle="bold"
+             />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        >
+        <TextView
+            android:id="@+id/BALANCEtextView6"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="BALANCE:"
+            android:textStyle="bold"
+
+         />
+        <TextView
+            android:id="@+id/balancetextView10"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Balance"
+            android:textStyle="bold"
+            />
+
+    </LinearLayout>
     <Button
         android:id="@+id/transferbutton2"
         android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:layout_height="wrap_content"
         android:text="Transfer Money"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.893" />
+        android:textStyle="bold"
 
-    <TextView
-        android:id="@+id/AccounttextView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Account No"
-        app:layout_constraintBottom_toBottomOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.729"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailIdtextView8"
-        app:layout_constraintVertical_bias="1.0" />
+         />
 
-    <TextView
-        android:id="@+id/emailIdtextView8"
-        android:layout_width="75dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="88dp"
-        android:text="Email Id"
-        app:layout_constraintBottom_toBottomOf="@+id/textView5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mobileIdtextView9"
-        app:layout_constraintVertical_bias="0.419" />
-
-    <TextView
-        android:id="@+id/mobileIdtextView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="96dp"
-        android:text="Mobile No"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.458"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/nametextView" />
-
-    <TextView
-        android:id="@+id/balancetextView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Balance"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.688"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AccounttextView4"
-        app:layout_constraintVertical_bias="0.106" />
-
-    <TextView
-        android:id="@+id/namelabeltextView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="NAME:"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/nametextView"
-        app:layout_constraintHorizontal_bias="0.374"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.109" />
-
-    <TextView
-        android:id="@+id/accounttextView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ACCOUNT NOS"
-        app:layout_constraintBottom_toTopOf="@+id/balancetextView10"
-        app:layout_constraintEnd_toStartOf="@+id/AccounttextView4"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EmailIdtextView5"
-        app:layout_constraintVertical_bias="0.47" />
-
-    <TextView
-        android:id="@+id/contacttextView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="44dp"
-        android:text="CONTACT NOS"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/namelabeltextView2"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/EmailIdtextView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Email id"
-        app:layout_constraintBottom_toTopOf="@+id/AccounttextView4"
-        app:layout_constraintEnd_toStartOf="@+id/emailIdtextView8"
-        app:layout_constraintHorizontal_bias="0.383"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contacttextView4"
-        app:layout_constraintVertical_bias="0.545" />
-
-    <TextView
-        android:id="@+id/BALANCEtextView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="BALANCE"
-        app:layout_constraintBottom_toBottomOf="@+id/balancetextView10"
-        app:layout_constraintEnd_toStartOf="@+id/balancetextView10"
-        app:layout_constraintHorizontal_bias="0.408"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accounttextView3"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/ifsctextView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="IFSC Code"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/IfsctextView3"
-        app:layout_constraintHorizontal_bias="0.424"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BALANCEtextView6"
-        app:layout_constraintVertical_bias="0.13" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
