@@ -107,7 +107,7 @@ transferButton=findViewById(R.id.transferbutton2);
                int from_account_balance=Integer.parseInt(totalBalanceTextView.getText().toString());
                String from_emaiL_id=emailTextView.getText().toString();
                String from_name=nameTextView.getText().toString();
-               int contact_nos=Integer.parseInt(mobileNoTextView.getText().toString());
+               String contact_nos=mobileNoTextView.getText().toString();
                int ifsc_code=Integer.parseInt(ifscTextView.getText().toString());
                 Intent i4=new Intent(DetailActivity.this,AllUserActivity.class);
           Bundle bundle=new Bundle();
@@ -118,7 +118,7 @@ transferButton=findViewById(R.id.transferbutton2);
           bundle.putString("email_Id_From",from_emaiL_id);
           bundle.putString("from_name_user",from_name);
           bundle.putInt("ifsc_code",ifsc_code);
-          bundle.putInt("from_contact_nos",contact_nos);
+          bundle.putString("from_contact_nos",contact_nos);
        //   bundle.putInt("type",0);
 
 
@@ -233,7 +233,7 @@ transferButton=findViewById(R.id.transferbutton2);
             ifscTextView.setContentDescription(IfscCode + "");
             /*****************Mobile *****************/
             int mobileIndex = data.getColumnIndex(BankContract.BankEntry.COLUMN_BANK_PEOPLE_MOBILE_NUMBER);
-            int mobileno = data.getInt(mobileIndex);
+            String mobileno = data.getString(mobileIndex);
             mobileNoTextView.setText(mobileno + "");
             mobileNoTextView.setContentDescription(mobileno + "");
             /*****************Email Id *****************/

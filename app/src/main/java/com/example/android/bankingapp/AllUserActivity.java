@@ -213,7 +213,7 @@ return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//Ban
             //TODO:mAKE IT MORE FLEXIBLE
             from_account_balance_total=from_account_balance_total-trans_money;
             int from_code_ifsc=bundle.getInt("ifsc_code");
-            int from_nos_contact=bundle.getInt("from_contact_nos");
+            String from_nos_contact=bundle.getString("from_contact_nos");
             String from_id_email=bundle.getString("email_Id_From");
             String from_user_name=bundle.getString("from_name_user");
 fromAccountForTransferTable=from_account;
@@ -270,7 +270,7 @@ fromAccountForTransferTable=from_account;
 
                 String toName=cursor1.getString(nameColIndex);
                 String toEmail=cursor1.getString(emailColIndex);
-                int toMobile=cursor1.getInt(mobileColIndex);
+                String toMobile=cursor1.getString(mobileColIndex);
                 int toIfsc=cursor1.getInt(ifscColIndex);
                 int toBalance=cursor1.getInt(balColIndex);
                 int toAcc=cursor1.getInt(AcColIndex);
