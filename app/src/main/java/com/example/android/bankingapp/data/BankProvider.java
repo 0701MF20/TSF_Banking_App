@@ -68,7 +68,6 @@ public class BankProvider extends ContentProvider {
      */
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        //Log.e("BankProvider","Reached HERE1");
 
         //sqlite database is object is created and get readable method is called
         SQLiteDatabase db=mDbHelpers.getReadableDatabase();
@@ -121,53 +120,7 @@ public class BankProvider extends ContentProvider {
      */
     @Override
     public Uri insert(Uri uri, ContentValues contentValues) {
-        //Sanity checkings:-
 
-        //sanity checking for name (name cannot be null if null then throw illegal argument exception)
-      ///imp plz use it
-        /*  String sanityName=contentValues.getAsString(BankContract.BankEntry.COLUMN_BANK_PEOPLE_NAME);
-        if(sanityName==null)
-        {
-            throw new IllegalArgumentException("Customer name is must for adding in database ");
-        }*/
-
-        //sanity checking for gender(gender can not be null or any other gender integer other than unkown,female and male thus in that case illegalArgumentException
-        ///imp plz use it
-
-       /* Integer sanityAccountNo=contentValues.getAsInteger(BankContract.BankEntry.COLUMN_ACCOUNT_NUMBER);
-        if(sanityAccountNo==null||(sanityAccountNo<0))
-        {
-            throw new IllegalArgumentException("Customer must have valid account nos");
-        }*/
-        ///imp plz use it
-
-        //sanity checking for weight (weight can be null and if null then weight is default  0(already finished this part by creating table of database in pet dbHelper) ,weight should not null and negattive then we have to proceed for sanity checking
-       /* Integer sanityIFSC=contentValues.getAsInteger(BankContract.BankEntry.COLUMN_IFSC_NUMBER);
-        if((sanityIFSC==null)||(sanityIFSC<0))
-        {
-            throw new IllegalArgumentException("Customer needs to have valid IFSC code and it should be positive");
-        }*/
-        ///imp plz use it
-       // public static final String COLUMN_TOTAL_BALANCE="net_balance";
-     /*   String sanityMail=contentValues.getAsString(BankContract.BankEntry.COLUMN_BANK_PEOPLE_EMAIL);
-        if((sanityMail==null)||(sanityMail==""))
-        {
-            throw new IllegalArgumentException("Customer needs to have valid email Id");
-
-        }*/
-        /*
-        int sanityMobile=contentValues.getAsInteger(BankContract.BankEntry.COLUMN_BANK_PEOPLE_MOBILE_NUMBER);
-        if((sanityMobile<0))
-        {
-            throw new IllegalArgumentException("Customer needs to have valid mobile and it should be positive");
-
-        }*/
-        /*
-        int sanityBalance=contentValues.getAsInteger(BankContract.BankEntry.COLUMN_TOTAL_BALANCE);
-        if(sanityBalance<500)
-        {
-            throw new IllegalArgumentException("Customer must need atleast minimal 500 as balance");
-        }*/
         // Get writeable database
         SQLiteDatabase db=mDbHelpers.getWritableDatabase();
         //match the uri and extract the code associated with uri
@@ -252,63 +205,6 @@ Log.e("BankProvider","single row");
      */
     private int updatePet(Uri uri,ContentValues contentValues,String selection,String[] selectionArgs)
     {
-        //first atleast check whether the contentvalues contain that key before doing data validation because there is possibility in update sql commmand
-        //that column is not present
-        //ContentValues.containkey(String key) return boolean
-        //for checking whwether key value is present in content values
-        // If the {@link PetEntry#COLUMN_PET_NAME} key is present,
-        // check that the name value is not null.
-      /*  if(contentValues.containsKey(BankContract.BankEntry.COLUMN_BANK_PEOPLE_NAME))
-        {
-            //for name
-            String sanityName=contentValues.getAsString(BankContract.BankEntry.COLUMN_BANK_PEOPLE_NAME);
-            if(sanityName==null)
-            {
-                throw new IllegalArgumentException("Name of Customer is must");
-            }
-
-        }
-        // If the {@link PetEntry#COLUMN_PET_GENDER} key is present,
-        // check that the gender value is valid.
-        if(contentValues.containsKey(BankContract.BankEntry.COLUMN_ACCOUNT_NUMBER))
-        {//for gender
-            Integer sanityAccount=contentValues.getAsInteger(BankContract.BankEntry.COLUMN_ACCOUNT_NUMBER);
-            if(sanityAccount==null||sanityAccount==0)
-            {
-                throw new IllegalArgumentException("Account number  is must b");
-            }
-        }
-        // If the {@link PetEntry#COLUMN_PET_WEIGHT} key is present,
-        // check that the weight value is valid.
-        if(contentValues.containsKey(BankContract.BankEntry.COLUMN_IFSC_NUMBER))
-        {
-            //for weight
-            Integer sanityIFSC=contentValues.getAsInteger(BankContract.BankEntry.COLUMN_IFSC_NUMBER);
-            if(sanityIFSC!=null||sanityIFSC<0)
-            {
-                throw new IllegalArgumentException("Weight must be positive");
-            }
-        }
-
-        if(contentValues.containsKey(BankContract.BankEntry.COLUMN_TOTAL_BALANCE))
-        {
-            //for weight
-            Integer sanitybalance=contentValues.getAsInteger(BankContract.BankEntry.COLUMN_TOTAL_BALANCE);
-            if(sanitybalance!=null||sanitybalance<499)
-            {
-                throw new IllegalArgumentException("BALANCE MUST BE ATLEAST 500");
-            }
-        }
-        if(contentValues.containsKey(BankContract.BankEntry.COLUMN_BANK_PEOPLE_MOBILE_NUMBER))
-        {
-            //for weight
-            Integer sanitymobile=contentValues.getAsInteger(BankContract.BankEntry.COLUMN_BANK_PEOPLE_MOBILE_NUMBER);
-            if(sanitymobile!=null||sanitymobile<0)
-            {
-                throw new IllegalArgumentException("Mobile must be graeter than zero");
-            }
-        }*/
-        // No need to check the breed, any value is valid (including null).
 
         // If there are no values to update, then don't try to update the database
         //if there is no value change in content value then does not change anything
@@ -367,21 +263,5 @@ Log.e("BankProvider","single row");
     public String getType(@NonNull Uri uri) {
         return null;
     }
-    /*
-    @Override
-    public String getType(Uri uri) {
-        final int match=sUriMatcher.match(uri);
-        switch (match)
-        {
-            //for list of pets
-            case BANK_ID:
-                return BankContract.BankEntry.CONTENT_LIST_TYPE;
-            //for single pet
-            case BANKS:
-                return BankContract.BankEntry.CONTENT_ITEM_TYPE;
-            default:
-                throw new IllegalArgumentException("Unknown URI "+uri+" with match "+match);
-        }
-    }*/
 
 }

@@ -64,7 +64,6 @@ public class TransferAdapter extends RecyclerView.Adapter<TransferAdapter.Transf
     public void onBindViewHolder(TransferAdapterViewHolder transferAdapterViewHolder, int position) {
         mCursor.moveToPosition(position);
 
-        // int viewType = getItemViewType(position);
 /******************TO ACCOUNT*********************/
        int to_acc=mCursor.getInt(TransferActivity.INDEX_COLUMN_TO);
         transferAdapterViewHolder.toAccView.setText(to_acc+"");
@@ -73,7 +72,6 @@ public class TransferAdapter extends RecyclerView.Adapter<TransferAdapter.Transf
 
 /******************FROM ACCOUNT*********************/
         int from_account=mCursor.getInt(TransferActivity.INDEX_COLUMN_FROM);
-        // Log.e("BankAdapter","account no:::"+accountNos+"  index ccount"+AllUserActivity.INDEX_ACCOUNT_NOS);
         transferAdapterViewHolder.fromAccView.setText(from_account+"");
         transferAdapterViewHolder.fromAccView.setContentDescription(from_account+"");
 

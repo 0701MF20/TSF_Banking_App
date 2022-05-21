@@ -31,9 +31,7 @@ import static com.example.android.bankingapp.data.BankContract.BankEntry.CONTENT
 import static com.example.android.bankingapp.data.BankContract.BankEntry.CONTENT_URI2;
 
 public class TransferActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
-//  private TextView fromAccountTextView;
-//  private TextView toAccountTextView;
-//  private TextView transferMoneyTextView;
+
     private RecyclerView recyclerView;
     private TransferAdapter transferAdapter;
     public Uri intentUri;
@@ -64,16 +62,10 @@ public class TransferActivity extends AppCompatActivity implements LoaderManager
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transfer);
         setTitle("Transfer Record");
-
-//        fromAccountTextView=findViewById(R.id.from_account);
-//        toAccountTextView=findViewById(R.id.to_account);
-//        transferMoneyTextView=findViewById(R.id.transfer_money);
         Log.e("TransferActivity","beginning2"+"TRANSFERMONEY:::"+AllUserActivity.transferMoneyFromTransferTable);
-
         if(AllUserActivity.transferMoneyFromTransferTable!=0) {
     Log.e("TransferActivity","beginning");
     inserttransferRecord();
-
 
 }
         recyclerView=findViewById(R.id.recylerview2);
@@ -82,10 +74,7 @@ public class TransferActivity extends AppCompatActivity implements LoaderManager
         recyclerView.setHasFixedSize(true);
         transferAdapter=new TransferAdapter(this);
         recyclerView.setAdapter(transferAdapter);
-        //  showLoading();
-
         LoaderManager.getInstance(this).initLoader(ID_BANK_LOADER,null,this);
-
     }
     /**
      * Get user input from editor and save new pet into database.
@@ -124,34 +113,7 @@ public class TransferActivity extends AppCompatActivity implements LoaderManager
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-/*
-        switch (id) {
-
-
-                //URI for all rows of weather data in our weather table
-                Uri forecastQueryUri = CONTENT_URI;
-                // Sort order: Ascending by date
-                String sortOrder =  BankContract.BankEntry.COLUMN_ACCOUNT_NUMBER + " ASC";
-
-return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//BankContract.BankEntry.COLUMN_ACCOUNT_NUMBER,null,sortOrder);
-            default:
-                throw new RuntimeException("Loader Not Implemented: " + id);
-        }*/
-//        String[] projections={
-//                BankContract.BankEntry._Id,
-//                BankContract.BankEntry.COLUMN_BANK_PEOPLE_NAME,
-//                BankContract.BankEntry.COLUMN_ACCOUNT_NUMBER,
-//                BankContract.BankEntry.COLUMN_IFSC_NUMBER};
-        //  switch (id) {
-        //case ID_BANK_LOADER:
         return new CursorLoader(this,BankContract.BankEntry.CONTENT_URI2,MAIN_TRANSFER_PROJECTION,null,null,null);
-        // break;
-        //   case ID_SELECT_ACCOUNT:
-
-        //        break;
-        //      default:
-        //           throw new RuntimeException("Loader Not Implemented: " + id);
-        //     }
     }
 
     @Override
@@ -170,9 +132,7 @@ return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//Ban
     }
 
     private void showWeatherDataView() {
-        /* hide the loading indicator */
-        //   mLoadingIndicator.setVisibility(View.INVISIBLE);
-        /* weather data is visible */
+
         recyclerView.setVisibility(View.VISIBLE);
     }
 

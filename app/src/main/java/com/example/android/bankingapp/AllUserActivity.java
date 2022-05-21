@@ -77,15 +77,10 @@ public class AllUserActivity extends AppCompatActivity implements LoaderManager.
             }
         });
 
-
-        //To recieve the intents
-     //   Intent intent = getIntent();
-        //To recieve the data associated with the intent
-       // intentUri = intent.getData();
            bundle=getIntent().getExtras();
         if (bundle != null) {
             setTitle(getString(R.string.Choose_Account));
-            //i keep loadermanager instance inside this loop so that idf the label is edit the they will show available data otherwise we do not need this
+            //i keep loader manager instance inside this loop so that idf the label is edit the they will show available data otherwise we do not need this
 
         }
 
@@ -109,34 +104,8 @@ public class AllUserActivity extends AppCompatActivity implements LoaderManager.
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-/*
-        switch (id) {
 
-
-                //URI for all rows of weather data in our weather table
-                Uri forecastQueryUri = CONTENT_URI;
-                // Sort order: Ascending by date
-                String sortOrder =  BankContract.BankEntry.COLUMN_ACCOUNT_NUMBER + " ASC";
-
-return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//BankContract.BankEntry.COLUMN_ACCOUNT_NUMBER,null,sortOrder);
-            default:
-                throw new RuntimeException("Loader Not Implemented: " + id);
-        }*/
-//        String[] projections={
-//                BankContract.BankEntry._Id,
-//                BankContract.BankEntry.COLUMN_BANK_PEOPLE_NAME,
-//                BankContract.BankEntry.COLUMN_ACCOUNT_NUMBER,
-//                BankContract.BankEntry.COLUMN_IFSC_NUMBER};
-      //  switch (id) {
-            //case ID_BANK_LOADER:
                 return new CursorLoader(this,BankContract.BankEntry.CONTENT_URI,MAIN_FORECAST_PROJECTION,null,null,null);
-           // break;
-         //   case ID_SELECT_ACCOUNT:
-
-        //        break;
-      //      default:
-     //           throw new RuntimeException("Loader Not Implemented: " + id);
-   //     }
     }
 
     @Override
@@ -155,9 +124,7 @@ return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//Ban
     }
 
     private void showWeatherDataView() {
-        /* hide the loading indicator */
-     //   mLoadingIndicator.setVisibility(View.INVISIBLE);
-        /* weather data is visible */
+
         recyclerView.setVisibility(View.VISIBLE);
     }
 
@@ -173,8 +140,7 @@ return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//Ban
 
     @Override
     public void onClick(int account) {
-   //    type=bundle.getInt("type");
-        /*&&type==0*/
+
         if(bundle!=null)
         {
 
@@ -183,29 +149,10 @@ return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//Ban
             Log.e("TransferActivity","transf"+transferMoneyFromTransferTable);
 
             //TODO:(2)
-           // int amount=Integer.parseInt(intentUri.getLastPathSegment());
 
             //TO ACCOUNT INDEX
             to_account_index=account;
-   //         Uri Content_to_uri=ContentUris.withAppendedId(CONTENT_URI,to_account_index);
 
-
-//            Uri intenturiss=ContentUris.withAppendedId(CONTENT_URI,(long)to_account_index);
-//            Cursor pointCursor=getContentResolver().query(intenturiss,null,null,null,null);
-//         String name1=pointCursor.getString(AllUserActivity.INDEX_PEOPLE_NAME);
-//            Log.e("AllUserActivity","NAME IS::::::::"+name1);
-//            if(pointCursor==null)
-//            {
-//                Toast.makeText(this,"Money is not deducted from Account"+rowsUpdated,Toast.LENGTH_SHORT).show();
-//            } else {
-//                Toast.makeText(this,"Money is updated"+rowsUpdated,Toast.LENGTH_SHORT).show();
-//            }
-
-
-
-////TO ACCOUNT INDEX
-//            int to_account_index=account;
-//mCursor=getContentResolver().query()
 //FROM_ACCOUNT FEATURE
             int from_account=bundle.getInt("account_from");
             int from_account_index=bundle.getInt("Index_Of_From_Account");
@@ -218,7 +165,7 @@ return new CursorLoader(this,forecastQueryUri,MAIN_FORECAST_PROJECTION,null//Ban
             String from_user_name=bundle.getString("from_name_user");
 fromAccountForTransferTable=from_account;
 
-  //          Uri contentUriForUpdated=Uri.withAppendedPath(BankContract.C
+
 //TRANSFER
             Log.e("AllUserActivity","Transfer Money:::"+trans_money);
 //FROM ACCOUNT
@@ -286,8 +233,6 @@ fromAccountForTransferTable=from_account;
                 valuesTo.put(BankContract.BankEntry.COLUMN_BANK_PEOPLE_MOBILE_NUMBER,toMobile);
                 valuesTo.put(BankContract.BankEntry.COLUMN_TOTAL_BALANCE,toBalance);
 
-              //  Uri intenturi=ContentUris.withAppendedId(CONTENT_URI,(long)from_account_index);
-              //  Log.e("UserAllActivity","IntentUri"+intenturi);
                 int torowsUpdated=getContentResolver().update(uri_for_account_sec_clicked,valuesTo,null,null);
                 if(torowsUpdated==0)
                 {
@@ -297,27 +242,14 @@ fromAccountForTransferTable=from_account;
                 }
 
 
-           //     Log.e("AllUserActivity","POSITION::::"+ cursor1.getPosition());
-             //   Log.e("AllUserActivity","POSITION::::"+ name23);
-
-
-                //   CustomerDetailIntent.setData(uri_for_account_clicked);
-               // startActivity(CustomerDetailIntent);
             }
             Log.e("AllUserActivity","TRU::::"+title);
 
-    //        type=1;
       Intent i5=new Intent(AllUserActivity.this,MainActivity.class);
      startActivity(i5);
-     // bundle=null;
         }else
         {
 
-//            if(title==getString(R.string.Choose_Account))
-//            {
-//                Log.e("AllUserActivity","TRUE");
-//            }
-   //         Log.e("AllUserActivity","Kuch toh gadbad h daya");
             Intent CustomerDetailIntent = new Intent(AllUserActivity.this,DetailActivity.class);
             Uri uri_for_account_clicked= CONTENT_URI.buildUpon().appendPath(Integer.toString(account)).build();
             CustomerDetailIntent.setData(uri_for_account_clicked);

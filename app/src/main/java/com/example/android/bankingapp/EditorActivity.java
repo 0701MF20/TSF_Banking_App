@@ -98,9 +98,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mMobileEditText=(EditText)findViewById(R.id.MobileNoseditTextTextPersonName);
         mEmailEditText=(EditText)findViewById(R.id.EmailIdeditTextTextPersonName2);
         mCustomerEditText=(EditText)findViewById(R.id.balanceTextTextPersonName3);
-       // mGenderSpinner = (Spinner) findViewById(R.id.spinner_gender);
-
-       // setupSpinner();
         //this is a touch listener which is used in order to get to know about the data changed and if it is changed on touch then
         //value is change to true
         View.OnTouchListener touchListener = new View.OnTouchListener() {
@@ -117,48 +114,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mEmailEditText.setOnTouchListener(touchListener);
         mCustomerEditText.setOnTouchListener(touchListener);
         mIFSCEditText.setOnTouchListener(touchListener);
-//        mGenderSpinner.setOnTouchListener(touchListener);
 
     }
 
-    /**
-     * Setup the dropdown spinner that allows the user to select the gender of the pet.
-     */
-  /*  private void setupSpinner() {
-        // Create adapter for spinner. The list options are from the String array it will use
-        // the spinner will use the default layout
-        ArrayAdapter genderSpinnerAdapter = ArrayAdapter.createFromResource(this,
-                R.array.array_gender_options, android.R.layout.simple_spinner_item);
-
-        // Specify dropdown layout style - simple list view with 1 item per line
-        genderSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-
-        // Apply the adapter to the spinner
-        mGenderSpinner.setAdapter(genderSpinnerAdapter);
-
-        // Set the integer mSelected to the constant values
-        mGenderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selection = (String) parent.getItemAtPosition(position);
-                if (!TextUtils.isEmpty(selection)) {
-                    if (selection.equals(getString(R.string.gender_male))) {
-                        mGender = PetContract.PetEntry.GENDER_MALE; // Male
-                    } else if (selection.equals(getString(R.string.gender_female))) {
-                        mGender = PetContract.PetEntry.GENDER_FEMALE; // Female
-                    } else {
-                        mGender = PetContract.PetEntry.GENDER_UNKNOWN; // Unknown
-                    }
-                }
-            }
-            // Because AdapterView is an abstract class, onNothingSelected must be defined
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                mGender = 0; // Unknown
-            }
-        });
-    }
-*/
     /**
      * Get user input from editor and save new pet into database.
      */
@@ -172,18 +130,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
        String emailId=mEmailEditText.getText().toString().trim();
        String mobile=mMobileEditText.getText().toString().trim();
        int customerbalance=Integer.parseInt(mCustomerEditText.getText().toString().trim());
-        //int weights=0;
-        //If empty then i means it will save 0 in database by default
-      /*  if(TextUtils.isEmpty(mWeightEditText.getText().toString().trim()))
-        {
-            weights=0;
-        }
-        else {
-            //here we are extracting the weights
-            weights = Integer.parseInt(mWeightEditText.getText().toString().trim());
-        }*/
-        // Create a ContentValues object where column names are the keys,
-        // and pet attributes from the editor are the values.
+
         //content value
         ContentValues values2 = new ContentValues();
         values2.put(BankContract.BankEntry.COLUMN_BANK_PEOPLE_NAME, name);
@@ -329,18 +276,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         switch (item.getItemId()) {
             // Respond to a click on the "Save" menu option
             case R.id.action_saved:
-                //solved the bugs
-               /* if((TextUtils.isEmpty(mNameEditText.getText().toString()))&&TextUtils.isEmpty(mIFSCEditText.getText().toString())&&TextUtils.isEmpty(mAccountEditText.getText().toString()))
-                {
-                    Toast.makeText(this,R.string.mandatory,Toast.LENGTH_SHORT).show();
-                    Intent i2=new Intent(this,AllUserActivity.class);
-                    startActivity(i2);
-                }
-                else
-                {
-                    //for inserting row of information
-                    insertPet();
-                }*/
+
                 insertPet();
                 Intent i2=new Intent(this,AllUserActivity.class);
                 startActivity(i2);
@@ -356,9 +292,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 return true;
             // Respond to a click on the "Up" arrow button in the app bar
             case android.R.id.home:
-                //<-
-                // Navigate back to parent activity (CatalogActivity)
-                //NavUtils.navigateUpFromSameTask(this);
                 //if nothing has changed in pet details then
                 if(!mDetailHasChanged)
                 {
@@ -369,7 +302,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 DialogInterface.OnClickListener discardOnClickListeners=new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //it will navigate from current acivity t paret of the the activity
+                        //it will navigate from current activity parent of the the activity
                         NavUtils.navigateUpFromSameTask(EditorActivity.this);
                     }
                 };
@@ -418,9 +351,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             int emailIndex=cursor.getColumnIndex(BankContract.BankEntry.COLUMN_BANK_PEOPLE_EMAIL);
             int balanceIndex=cursor.getColumnIndex(BankContract.BankEntry.COLUMN_TOTAL_BALANCE);
             int mobileindex=cursor.getColumnIndex(BankContract.BankEntry.COLUMN_BANK_PEOPLE_MOBILE_NUMBER);
-//            int weightPetIndex = cursor.getColumnIndex(PetContract.PetEntry.COLUMN_PET_WEIGHT);
             String nameCustomer = cursor.getString(nameIndex);
-      //      String breedPet = cursor.getString(accountIndex);
             int ifscCode = cursor.getInt(ifscIndex);
             int accountCode = cursor.getInt(accountIndex);
             String email=cursor.getString(emailIndex);
@@ -435,7 +366,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             mEmailEditText.setText(email);
             mCustomerEditText.setText(balance+"");
             mMobileEditText.setText(mobile+"");
-//            mGenderSpinner.setSelection(genderPet);
         }
     }
 
@@ -447,6 +377,5 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mMobileEditText.setText("");
         mEmailEditText.setText("");
         mCustomerEditText.setText("");
-      //  mGenderSpinner.setSelection(0);
     }
 }
