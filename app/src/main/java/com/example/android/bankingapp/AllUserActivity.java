@@ -35,8 +35,8 @@ import static com.example.android.bankingapp.data.BankContract.BankEntry.CONTENT
 
 public class AllUserActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,BankAdapter.BankAdapterOnClickHandler {
    public static int toAccountForTransferTable=0;
-           public static  int fromAccountForTransferTable=0;
-           public static int transferMoneyFromTransferTable=0;
+   public static  int fromAccountForTransferTable=0;
+   public static int transferMoneyFromTransferTable=0;
     private RecyclerView recyclerView;
     private BankAdapter bankAdapter;
     public  Uri intentUri;
